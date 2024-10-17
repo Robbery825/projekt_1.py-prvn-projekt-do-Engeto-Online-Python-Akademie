@@ -1,6 +1,6 @@
 projekt_1.py: První projekt do Engeto Online Python Akademie
 author: Robert Svorada
-email: robert825
+email: robert825seznam.cz
 discord: strejdabob.
 TEXTS = ['''
 Situated about 10 miles west of Kemmerer,
