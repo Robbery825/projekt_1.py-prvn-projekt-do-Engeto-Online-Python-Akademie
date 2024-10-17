@@ -75,4 +75,4 @@ print(cara)
 delka_slov = sorted([len(slovo) for slovo in vybrany_text.split()])
 print("Délka slov: ")
 for index, delka in enumerate(delka_slov, start=1,):
-    print(f"{index}: {"*" * delka} | {delka}")
+    print(f"{index}| {"*" * delka} | {delka}")
