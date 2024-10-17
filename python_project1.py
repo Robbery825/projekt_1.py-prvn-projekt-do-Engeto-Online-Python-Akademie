@@ -1,7 +1,7 @@
 projekt_1.py: První projekt do Engeto Online Python Akademie
 author: Robert Svorada
 email: robert825
-discord: Strejda Bob
+discord: strejdabob.
 TEXTS = ['''
 Situated about 10 miles west of Kemmerer,
 Fossil Butte is a ruggedly impressive
