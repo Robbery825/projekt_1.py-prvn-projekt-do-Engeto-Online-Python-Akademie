@@ -30,49 +30,79 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-
 vybrany_text = TEXTS
 cara = "-" * 40
-registred_user = {
+registered_user = {
     "bob": "123",
     "ann": "pass123",
     "mike": "password123",
     "liz": "pass123"
 }
 import sys
-import getpass
 user = input("Zadejte své přihlašovací jméno: ")
-password = getpass.getpass("Zadejte svoje heslo: ")
-if user in registred_user:
-    print(f"Welcome to the app: {user}\nWe have 3 text to be analyzed")
+password = input("Zadejte svoje heslo: ")
+print(f"username: {user}")
+print(f"password: {password}")
+print(cara)
+if user in registered_user and registered_user[user] == password:
+    print(f"Welcome to the app: {user}\nWe have {len(TEXTS)} texts to be analyzed.")
     print(cara)
 else: 
-    print("Unregistered user, termining the program")
+    print("Unregistered user, terminating the program.")
     sys.exit()
-vyber = int(input("Zadejte číslo  (1-3): "))
-if vyber <1 or vyber > len(TEXTS):
-    print("Neplatný výběr. Program končí")
     print(cara)
-else:
-    print(f"Enter number btw. 1 and 3 to select: {vyber - 0 }")
-    print(cara)
-    vybrany_text = TEXTS[vyber - 1]
-    pocet_slov = len(vybrany_text.split())
-    print(f"There are {pocet_slov} words in the text.")
-    pocet_velkych_pismen = sum(1 for slovo in vybrany_text.split() if slovo.istitle())
-    print(f"There are {pocet_velkych_pismen} titlecase words.")
-    pocet_velkych_pismen2 = sum(1 for slovo in vybrany_text.split() if slovo.isupper() and slovo.isalpha())
-    print(f"There are {pocet_velkych_pismen2} uppercase words.")
-    pocet_malym_pismem = sum(1 for slovo in vybrany_text.split() if slovo.islower())
-    print(f"There are {pocet_malym_pismem} lowercase in words")
-    pocet_cisel = sum(1 for cislo in vybrany_text.split() if cislo.isdigit())
-    print(f"There are {pocet_cisel} numeric string.")
-    suma= sum(int(cislo) for cislo in vybrany_text.split() if cislo.isdigit())
-    print(f"The sum of all the the numbers {suma}.")
-    print(cara)
+
+while True:
+    vstup = input("Zadejte číslo (1-3): ")  
+
+    if vstup.strip() == "":
+        print("Vstup nemůže být prázdný. Zkuste to znovu.")
+        continue
+
+    if vstup.isdigit():
+        vyber = int(vstup)
+    else:
+        print("Neplatný vstup. Zadejte pouze celé číslo.")
+        continue  
+    if vyber < 1 or vyber > 3:
+        print("Neplatný výběr. Vstup musí být v rozsahu 1 - 3.")
+    else:
+        print(f"Enter a number btw. 1 and {len(TEXTS)} to select: {vyber}")  
+        print(cara)
+        break
+
+
+
+vybrany_text = TEXTS[vyber - 1]
+pocet_slov = len(vybrany_text.split()) 
+print(f"There are {pocet_slov} words in the text.")
+pocet_velkych_pismen = sum(1 for slovo in vybrany_text.split() if slovo.istitle())
+print(f"There are {pocet_velkych_pismen} titlecase words.")
+pocet_velkych_pismen2 = sum(1 for slovo in vybrany_text.split() if slovo.isupper() and slovo.isalpha())
+print(f"There are {pocet_velkych_pismen2} uppercase words.")
+pocet_malym_pismem = sum(1 for slovo in vybrany_text.split() if slovo.islower())
+print(f"There are {pocet_malym_pismem} lowercase in words")
+pocet_cisel = sum(1 for cislo in vybrany_text.split() if cislo.isdigit()) 
+print(f"There are {pocet_cisel} numeric string.")
+suma= sum(int(cislo) for cislo in vybrany_text.split() if cislo.isdigit())
+print(f"The sum of all the the numbers {suma}.")
+print(cara)
 print("LEN| OCCURENCES |NR.")
 print(cara)
-delka_slov = sorted([len(slovo) for slovo in vybrany_text.split()])
-print("Délka slov: ")
-for index, delka in enumerate(delka_slov, start=1,):
-    print(f"{index}| {"*" * delka} | {delka}")
+
+
+
+slova = vybrany_text.split()
+delka_slov = {}
+
+for slovo in slova:
+    delka = len(slovo.strip(",."))
+    if delka in delka_slov:
+        delka_slov[delka] += 1
+    else:
+        delka_slov[delka] = 1
+mdelka = max(delka_slov.keys())
+for delka in range(1, mdelka + 1):
+    pocet = delka_slov.get(delka, 0)
+    print(f"{delka:<2} | {'*' * pocet:<12} | {pocet}")
+
